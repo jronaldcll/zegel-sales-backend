@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Sales\SalesController;
 use App\Http\Controllers\Products\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
-    
+
     /**
      * Authentication Module
      */
@@ -29,7 +30,7 @@ Route::group([
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('me', [AuthController::class, 'me']);
     });
-    
+
 
     /**
      * Products Module
@@ -37,6 +38,15 @@ Route::group([
     Route::resource('products', ProductsController::class);
     Route::get('products/view/all', [ProductsController::class, 'indexAll']);
     Route::get('products/view/search', [ProductsController::class, 'search']);
+
+
+    /**
+     * Sales Module
+     */
+    Route::resource('sales', SalesController::class);
+    Route::get('sales/view/all', [SalesController::class, 'indexAll']);
+    Route::get('sales/view/search', [SalesController::class, 'search']);
+
 
 });
 
